@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { ConfigEnv, UserConfigExport } from 'vite';
 import { createStyleImportPlugin, NutuiResolve } from 'vite-plugin-style-import';
 import { viteMockServe } from 'vite-plugin-mock';
-import eruda from 'vite-plugin-eruda';
+import eruda from 'vite-plugin-eruda-plus';
 
 const pathResolve = (dir: string) => {
   return resolve(process.cwd(), '.', dir);
@@ -45,7 +45,7 @@ export default function ({ command }: ConfigEnv): UserConfigExport {
       createStyleImportPlugin({
         resolves: [NutuiResolve()],
       }),
-      eruda(),
+      eruda({ eruda_src: 'https://unpkg.com/eruda@2.4.1/eruda.js' }),
       viteMockServe({
         mockPath: './src/mock',
         localEnabled: command === 'serve',
